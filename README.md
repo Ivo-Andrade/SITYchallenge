@@ -1,4 +1,4 @@
-# SITYchallenge
+# SITY challenge
 Challenge provided by sityinc.com
 
 ## Exercise
