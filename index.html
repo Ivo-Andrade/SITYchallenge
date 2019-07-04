@@ -6,12 +6,17 @@
 
 		<meta charset="utf-8">
 		<title>SITY Challenge</title>
+
+		<!--Bootstrap CSS-->
+		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+		
 		<!--<link href="./style.css" type="text/css" rel="stylesheet">-->
 		<style>
 
 			html, body {
-				opacity: 1;
-				transition: 2s opacity;
+				z-index: 0;
+				opacity: 0.9;
+				transition: 1s opacity;
 				height: 100vh;
 				width: 100vw;
 				min-height: 480px;
@@ -22,13 +27,56 @@
 				font-family: "Segoe UI", Helvetica, sans-serif;
 			}
 
-			body.fade-out{
-				opacity: 0.2;
-				transition: none;
+			/* opacity fade out into main page */
+			body.fade-in{
+				opacity: 0.5;
+				transition: 1s opacity;
 			}
 
+			body.fade-out{
+				opacity: 1;
+				transition: 1s opacity;
+			}
+
+			/* destination question fade in upon page opening*/
+			#destination.fade-in{
+				opacity: 1;
+				transition: 1s opacity;
+			}
+
+			/* destination question fade out once user enters input */
+			#destination.fade-out{
+				opacity: 0;
+				transition: 1s opacity;
+			}
+
+			/* 'final destination' fade out into main page*/
+			#destination{
+				position: fixed;
+				display: flex;
+				flex-direction: column;
+				text-align: center;
+				z-index: 100;
+				opacity: 1;
+				transition: 1s opacity;
+				width: 80vw;
+				height: 100vh;
+				color: white;
+				margin-left: 10vw;
+				margin-top: 35vh;
+			}
+
+			/* additional question formatting*/
+			#destinationQuestion{
+				color: white;
+				font-size: 10vh;
+			}
+
+
+
+			/* page header */
 			header {
-				z-index: 1000;
+				z-index: 10;
 				position: fixed;
 				text-align: center;
 				top: 0;
@@ -38,6 +86,27 @@
 				background-image: linear-gradient(to bottom right, black, blue);
 			}
 
+			/* header icon */
+			#mapIcon{
+				float: left;
+				width: 78px;
+				height: 78px;
+			}
+
+			/* page title */
+			#pageTitle.fade-out{
+				opacity: 0;
+			}
+
+			/* page title */
+			#pageTitle{
+				opacity: 1;
+				transition: 1s opacity;
+				color: white;
+				padding-top: 0.3em;
+			}
+
+			/* div with Google Maps */
 			#map {
 				z-index: 1;
 				float:left;
@@ -47,18 +116,9 @@
        			width: 100vw;
       		}
 
-			#mapIcon{
-				float: left;
-				width: 78px;
-				height: 78px;
-			}
-
-			#pageTitle{
-				color: white;
-			}
-
+      		/* page footer */
 			footer{
-				z-index: 1000;
+				z-index: 10;
 				position: fixed;
 				background-color: black;
 				background-image: linear-gradient(to bottom right, black, #222);
@@ -67,6 +127,7 @@
 				bottom: 0;
 			}
 
+			/* page footer text */
 			#footNote{
 				margin: 0;
 				font-size: 0.9em;
@@ -80,22 +141,45 @@
 
 	<body>
 
+		<!--JQuery-->
 		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
-		<script>document.body.className += ' fade-out';</script>
-		<script>$(function() {
-    				$('body').removeClass('fade-out');
+
+		<!--Page Intro, with fades in (for dest. input) and fade out (towards the map)-->
+		<script>
+			setTimeout(function(){
+    			document.body.className += ' fade-in';
+				document.body.className += ' fade-in';
+			},1000);
+		</script>
+		<script>
+			$(function() {
+				$('#destinationInput').click( function(){
+					$('#destination').removeClass('fade-in');
+					$('body').removeClass('fade-in');
+					$('#pageTitle').addClass('fade-out');
+					$('#destination').addClass('fade-out');
+					$('body').addClass('fade-out');
 				});
+			});
 		</script>
 
+		<!--Page Header-->
 		<header>
 			<img id="mapIcon" src="map.png"/>
 			<h1 id="pageTitle">SITY Challenge<h1>
 		</header>
 
-		<div id="map">
-			
+		<!--div for Google Maps-->
+		<div id="map"></div>
+
+		<!--div for destination input-->
+		<div id="destination">
+			<p id="destinationQuestion">Para onde vamos?</p>
+			<input type="text" value="Vou para..." id="address">
+			<input type="submit" value="Vamos!" id="destinationInput">
 		</div>
 
+		<!--script for the Google Maps app-->
 		<script type="text/javascript">
 			var map, infoWindow;
 		      function initMap() {
@@ -135,9 +219,11 @@
 		      }
 		</script>
 
+		<!--script to summon Google Maps-->
 		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxfcO1YshS2zReHmTd_tud547lXxnprf4&callback=initMap">
     	</script>
 
+    	<!--Page Footer-->
 		<footer>
 			<p id="footNote">Project by Ivo de Andrade de Deus. Map Icon by The Noun Project.</p>
 		</footer>
