@@ -27,4 +27,4 @@ To develop the page, you can utilize the following techonologies:
 - BOOTSTRAP
 - MEDIA QUERIES
 
-REACT.JS and PHP will be distinguishing features."
+REACT.JS and PHP will be distinguishing features.

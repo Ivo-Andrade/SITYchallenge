@@ -10,6 +10,8 @@
 		<style>
 
 			html, body {
+				opacity: 1;
+				transition: 2s opacity;
 				height: 100vh;
 				width: 100vw;
 				min-height: 480px;
@@ -18,6 +20,11 @@
 				margin: 0;
 				color: black;
 				font-family: "Segoe UI", Helvetica, sans-serif;
+			}
+
+			body.fade-out{
+				opacity: 0.2;
+				transition: none;
 			}
 
 			header {
@@ -73,6 +80,13 @@
 
 	<body>
 
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.0/jquery.min.js"></script>
+		<script>document.body.className += ' fade-out';</script>
+		<script>$(function() {
+    				$('body').removeClass('fade-out');
+				});
+		</script>
+
 		<header>
 			<img id="mapIcon" src="map.png"/>
 			<h1 id="pageTitle">SITY Challenge<h1>
@@ -81,7 +95,7 @@
 		<div id="map">
 			
 		</div>
-		
+
 		<script type="text/javascript">
 			var map, infoWindow;
 		      function initMap() {
