@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+
+<html>
+
+	<head>
+
+		<meta charset="utf-8">
+		<title>SITY Challenge</title>
+		<!--<link href="./style.css" type="text/css" rel="stylesheet">-->
+		<style>
+
+			html, body {
+				height: 100vh;
+				width: 100vw;
+				min-height: 480px;
+				background-color: aqua;
+				background-image: linear-gradient(to bottom right, blue, aqua);
+				margin: 0;
+				color: black;
+				font-family: "Segoe UI", Helvetica, sans-serif;
+			}
+
+			header {
+				z-index: 1000;
+				position: fixed;
+				text-align: center;
+				top: 0;
+				height: 80px;
+				width: 100vw;
+				background-color: blue;
+				background-image: linear-gradient(to bottom right, black, blue);
+			}
+
+			#map {
+				z-index: 1;
+				float:left;
+				margin-top: 80px;
+				margin-bottom: 20px;
+       			height: calc(100vh - 100px);
+       			width: 100vw;
+      		}
+
+			#mapIcon{
+				float: left;
+				width: 78px;
+				height: 78px;
+			}
+
+			#pageTitle{
+				color: white;
+			}
+
+			footer{
+				z-index: 1000;
+				position: fixed;
+				background-color: black;
+				background-image: linear-gradient(to bottom right, black, #222);
+				width: 100vw;
+				height: 20px;
+				bottom: 0;
+			}
+
+			#footNote{
+				margin: 0;
+				font-size: 0.9em;
+				color: white;
+				text-align: center;
+			}
+
+		</style>
+
+	</head>
+
+	<body>
+
+		<header>
+			<img id="mapIcon" src="map.png"/>
+			<h1 id="pageTitle">SITY Challenge<h1>
+		</header>
+
+		<div id="map">
+			
+		</div>
+		
+		<script type="text/javascript">
+			var map, infoWindow;
+		      function initMap() {
+		        map = new google.maps.Map(document.getElementById('map'), {
+		          center: {lat: -34.397, lng: 150.644},
+		          zoom: 14
+		        });
+		        infoWindow = new google.maps.InfoWindow;
+
+		        // Try HTML5 geolocation.
+		        if (navigator.geolocation) {
+		          navigator.geolocation.getCurrentPosition(function(position) {
+		            var pos = {
+		              lat: position.coords.latitude,
+		              lng: position.coords.longitude
+		            };
+
+		            infoWindow.setPosition(pos);
+		            infoWindow.setContent('Location found.');
+		            infoWindow.open(map);
+		            map.setCenter(pos);
+		          }, function() {
+		            handleLocationError(true, infoWindow, map.getCenter());
+		          });
+		        } else {
+		          // Browser doesn't support Geolocation
+		          handleLocationError(false, infoWindow, map.getCenter());
+		        }
+		      }
+
+		      function handleLocationError(browserHasGeolocation, infoWindow, pos) {
+		        infoWindow.setPosition(pos);
+		        infoWindow.setContent(browserHasGeolocation ?
+		                              'Error: The Geolocation service failed.' :
+		                              'Error: Your browser doesn\'t support geolocation.');
+		        infoWindow.open(map);
+		      }
+		</script>
+
+		<script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAxfcO1YshS2zReHmTd_tud547lXxnprf4&callback=initMap">
+    	</script>
+
+		<footer>
+			<p id="footNote">Project by Ivo de Andrade de Deus. Map Icon by The Noun Project.</p>
+		</footer>
+
+	</body>
+
+<html>
