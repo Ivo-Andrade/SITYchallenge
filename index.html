@@ -100,6 +100,9 @@
 			<!--div for Google Maps-->
 			<div id="map"></div>
 
+			<!-- div for Instructions Panel-->
+			<div id="panel" class="fixed m-1"></div>
+
 			<!--Placeholder in case Maps don't show up-->
 			<div class="d-flex flex-column justify-content-center align-items-center" id="alert">
 				<h1 class="text-center intro-hide" id="alertText">Permita o serviço de geolocalização do seu aparelho e navegador para obter sua rota!</h1>
@@ -117,7 +120,7 @@
 
 				var latitude = null;                    
 				var longitude = null;                 
-				var coords = new google.maps.LatLng(latitude, longitude);
+				var coords = null;
 
 				var map;
 
@@ -186,7 +189,7 @@
 				}
 
 				function calcRoute(end) {
-					if(end.value.latitude == null){
+					if(coords === null){
 						alert("Permita o serviço de geolocalização do seu aparelho e navegador para obter sua rota!");
 					}
 					else{

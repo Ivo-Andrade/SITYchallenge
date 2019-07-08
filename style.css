@@ -125,6 +125,26 @@ footer{
 	top: 0;
 }
 
+/*#panel i{
+    font-size: 12px;
+}
+
+#panel {
+	position: absolute;
+	background-color: red;
+	height: 50vh;
+	float: right;
+	width: 390px;
+	overflow: auto;
+}*/
+
+@media print {
+	#panel {
+		float: none;
+		width: auto;
+	}
+}
+
 #alert{
 	position: absolute;
 	top: 0;
